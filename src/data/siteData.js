@@ -1,6 +1,7 @@
 import {
-  FiAward, FiFacebook, FiTwitter, FiYoutube, FiLinkedin, FiTrendingUp,
+  FiAward, FiFacebook, FiYoutube, FiTrendingUp, FiInstagram,
 } from 'react-icons/fi';
+import { AiFillTikTok } from 'react-icons/ai';
 import {
   FaBuilding, FaHandshake, FaKey, FaChartLine,
   FaPaintBrush as FaPaint, FaBullhorn, FaShieldAlt,
@@ -406,10 +407,10 @@ export const CSR_ACTIVITIES = [
    SOCIAL LINKS
    ═══════════════════════════════════════════════ */
 export const SOCIAL_LINKS = [
-  { icon: FiFacebook, href: '#', label: 'Facebook' },
-  { icon: FiTwitter, href: '#', label: 'Twitter' },
-  { icon: FiYoutube, href: '#', label: 'YouTube' },
-  { icon: FiLinkedin, href: '#', label: 'LinkedIn' },
+  { icon: FiFacebook, href: 'https://www.facebook.com/fivestarestate26/', label: 'Facebook' },
+  { icon: FiYoutube, href: 'https://www.youtube.com/@fivestarestate1', label: 'YouTube' },
+  { icon: FiInstagram, href: 'https://www.instagram.com/fivestarestate.pk?igsi=ZXk5aXR3d3NwODcx', label: 'Instagram' },
+  { icon: AiFillTikTok, href: 'https://www.tiktok.com/@fivestarestate1', label: 'TikTok' },
 ];
 
 /* ═══════════════════════════════════════════════
