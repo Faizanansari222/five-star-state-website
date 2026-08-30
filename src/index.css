@@ -7,9 +7,9 @@
   --color-navy: #0a1628;
   --color-navy-light: #112240;
   --color-navy-mid: #1a365d;
-  --color-gold: #c9a84c;
-  --color-gold-light: #d4b96a;
-  --color-gold-dark: #b8932e;
+  --color-gold: #1E9BD5;
+  --color-gold-light: #93c5fd;
+  --color-gold-dark: #2E4893;
   --color-cream: #faf8f2;
 }
 
@@ -26,10 +26,10 @@ body {
 /* Scrollbar */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #0a1628; }
-::-webkit-scrollbar-thumb { background: #c9a84c; border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: #25a2eb; border-radius: 4px; }
 
 /* Selection */
-::selection { background: #c9a84c; color: #0a1628; }
+::selection { background: #055d9c; color: #ffffff; }
 
 /* ===== ANIMATIONS ===== */
 @keyframes fade-up {
@@ -53,8 +53,8 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4); }
-  50% { box-shadow: 0 0 20px 10px rgba(201, 168, 76, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(55, 114, 177, 0.821); }
+  50% { box-shadow: 0 0 20px 10px rgba(37, 99, 235, 0); }
 }
 @keyframes float {
   0%, 100% { transform: translateY(0); }

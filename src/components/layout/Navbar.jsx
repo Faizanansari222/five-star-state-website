@@ -171,7 +171,7 @@ export default function Navbar() {
           </a>
           <Link
             to="/contact"
-            className="px-6 py-2.5 bg-gold text-navy text-sm font-semibold rounded hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/25 transition-all duration-300"
+            className="px-6 py-2.5 bg-gold hover:text-white  text-sm font-semibold rounded hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/25 transition-all duration-300"
           >
             Book a Visit
           </Link>
@@ -201,93 +201,106 @@ function MobileMenu({ open, onClose, getCityProjects }) {
   const [expandedCity, setExpandedCity] = useState(null);
   return (
     <div
-      className={`lg:hidden fixed inset-0 top-0 bg-white z-50 flex flex-col transition-all duration-500 ${
-        open ? "translate-x-0" : "translate-x-full"
+      className={`lg:hidden fixed  h-[500px]  inset-0 z-50 transition-opacity duration-300 ${
+        open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
       }`}
     >
-      <div className="flex justify-between items-center p-6 border-b border-gray-100">
-        <span className="font-heading text-lg font-bold text-navy">Menu</span>
-        <button
-          onClick={onClose}
-          className="text-navy p-2"
-          aria-label="Close menu"
-        >
-          <FiX size={28} />
-        </button>
-      </div>
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-navy/50 backdrop-blur-sm"
+        onClick={onClose}
+      />
 
-      <div className="flex-1 overflow-y-auto px-6 py-4">
-        <ul className="space-y-1">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <Link
-                to={link.href}
-                onClick={onClose}
-                className="block py-3.5 text-base font-medium text-gray-700 hover:text-gold-dark border-b border-gray-100 transition-colors"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+      {/* Panel */}
+      <div
+        className={`absolute top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl flex flex-col transition-transform duration-500 ease-in-out ${
+          open ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex justify-between items-center p-6 border-b border-gray-100">
+          <span className="font-heading text-lg font-bold text-navy">Menu</span>
+          <button
+            onClick={onClose}
+            className="text-navy p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            aria-label="Close menu"
+          >
+            <FiX size={28} />
+          </button>
+        </div>
 
-          {/* Projects section */}
-          <li className="pt-2">
-            <div className="py-3.5 text-base font-bold text-navy">Projects</div>
-            <ul className="space-y-0">
-              {CITIES.map((city) => (
-                <li key={city.id}>
-                  <button
-                    onClick={() =>
-                      setExpandedCity(
-                        expandedCity === city.slug ? null : city.slug,
-                      )
-                    }
-                    className="w-full flex items-center justify-between py-3 text-sm font-medium text-gray-600 hover:text-gold-dark border-b border-gray-50 transition-colors"
-                  >
-                    {city.name}
-                    <FiChevronRight
-                      size={14}
-                      className={`transition-transform duration-300 ${expandedCity === city.slug ? "rotate-90" : ""}`}
-                    />
-                  </button>
-                  {expandedCity === city.slug && (
-                    <ul className="pl-4 pb-2">
-                      <li>
-                        <Link
-                          to={`/projects/${city.slug}`}
-                          onClick={onClose}
-                          className="block py-2.5 text-sm text-gold-dark font-medium hover:underline"
-                        >
-                          View All {city.name} Projects →
-                        </Link>
-                      </li>
-                      {getCityProjects(city.slug).map((project) => (
-                        <li key={project.id}>
+        <div className="flex-1 overflow-y-auto px-6 py-4">
+          <ul className="space-y-1">
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
+                <Link
+                  to={link.href}
+                  onClick={onClose}
+                  className="block py-3.5 text-base font-medium text-gray-700 hover:text-gold-dark border-b border-gray-100 transition-colors"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+
+            {/* Projects section */}
+            <li className="pt-2">
+              <div className="py-3.5 text-base font-bold text-navy">Projects</div>
+              <ul className="space-y-0">
+                {CITIES.map((city) => (
+                  <li key={city.id}>
+                    <button
+                      onClick={() =>
+                        setExpandedCity(
+                          expandedCity === city.slug ? null : city.slug,
+                        )
+                      }
+                      className="w-full flex items-center justify-between py-3 text-sm font-medium text-gray-600 hover:text-gold-dark border-b border-gray-50 transition-colors"
+                    >
+                      {city.name}
+                      <FiChevronRight
+                        size={14}
+                        className={`transition-transform duration-300 ${expandedCity === city.slug ? "rotate-90" : ""}`}
+                      />
+                    </button>
+                    {expandedCity === city.slug && (
+                      <ul className="pl-4 pb-2">
+                        <li>
                           <Link
-                            to={`/projects/${city.slug}/${project.id}`}
+                            to={`/projects/${city.slug}`}
                             onClick={onClose}
-                            className="block py-2.5 text-sm text-gray-500 hover:text-gold-dark transition-colors"
+                            className="block py-2.5 text-sm text-gold-dark font-medium hover:underline"
                           >
-                            {project.title}
+                            View All {city.name} Projects →
                           </Link>
                         </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </li>
-        </ul>
+                        {getCityProjects(city.slug).map((project) => (
+                          <li key={project.id}>
+                            <Link
+                              to={`/projects/${city.slug}/${project.id}`}
+                              onClick={onClose}
+                              className="block py-2.5 text-sm text-gray-500 hover:text-gold-dark transition-colors"
+                            >
+                              {project.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          </ul>
 
-        <div className="mt-8">
-          <Link
-            to="/contact"
-            onClick={onClose}
-            className="block w-full py-4 bg-gold text-navy text-center text-base font-semibold rounded-lg"
-          >
-            Book a Visit
-          </Link>
+          <div className="mt-8">
+            <Link
+              to="/contact"
+              onClick={onClose}
+              className="block w-full py-4 bg-gold text-white text-center text-base font-semibold rounded-lg hover:bg-gold-dark transition-colors"
+            >
+              Book a Visit
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -16,7 +16,7 @@ export default function ServiceCard({ service, index }) {
       <div className="w-14 h-14 rounded-xl bg-gold/10 flex items-center justify-center mb-5 group-hover:bg-gold group-hover:scale-110 transition-all duration-500">
         <Icon
           size={24}
-          className="text-gold group-hover:text-navy transition-colors duration-500"
+          className="text-gold group-hover:text-white transition-colors duration-500"
         />
       </div>
       <h3 className="font-heading text-lg font-bold text-navy mb-3 group-hover:text-gold-dark transition-colors">

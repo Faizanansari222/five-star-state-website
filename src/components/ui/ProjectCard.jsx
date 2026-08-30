@@ -26,7 +26,7 @@ export default function ProjectCard({ project, index }) {
           <span
             className={`px-3.5 py-1 rounded-full text-xs font-bold tracking-wide uppercase ${
               project.type === 'Ongoing'
-                ? 'bg-gold text-navy'
+                ? 'bg-gold text-white'
                 : 'bg-emerald-500 text-white'
             }`}
           >
