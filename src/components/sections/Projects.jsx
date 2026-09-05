@@ -33,7 +33,7 @@ export default function Projects() {
               onClick={() => setActiveFilter(f)}
               className={`px-7 py-2.5 rounded-full text-sm font-medium border transition-all duration-300 ${
                 activeFilter === f
-                  ? 'bg-gold text-navy border-gold shadow-lg shadow-gold/20'
+                  ? 'bg-gold text-white border-gold shadow-lg shadow-gold/20'
                   : 'bg-white text-gray-600 border-gray-200 hover:border-gold hover:text-gold'
               }`}
             >

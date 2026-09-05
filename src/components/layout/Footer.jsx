@@ -26,7 +26,7 @@ export default function Footer() {
               <img
                 src={logo}
                 alt="Five Star Estate"
-                className="w-22  rounded-lg object-cover"
+                className="w-38  rounded-lg object-cover"
               />
             </Link>
             <p className="text-sm text-gray-500 leading-relaxed mb-5">
@@ -40,7 +40,7 @@ export default function Footer() {
                   href={s.href}
                   target="_blank"
                   aria-label={s.label}
-                  className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 hover:bg-gold hover:text-navy transition-all duration-300"
+                  className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 hover:bg-[#0071BB] hover:text-white transition-all duration-300"
                 >
                   <s.icon size={16} />
                 </a>

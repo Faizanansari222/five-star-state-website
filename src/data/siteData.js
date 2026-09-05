@@ -7,6 +7,9 @@ import {
   FaPaintBrush as FaPaint, FaBullhorn, FaShieldAlt,
   FaHeart, FaHome, FaCertificate, FaLeaf,
 } from 'react-icons/fa';
+import jLogo from '../assets/clients_LOGO/images.png';
+import fgrfLogo from '../assets/clients_LOGO/FGRF_LOGO.png';
+import saylaniLogo from '../assets/clients_LOGO/saylani_logo.png';
 
 /* ═══════════════════════════════════════════════
    NAVIGATION
@@ -366,7 +369,13 @@ export const TEAM = [
 /* ═══════════════════════════════════════════════
    CLIENTS
    ═══════════════════════════════════════════════ */
-export const CLIENTS = ['J.', 'Saylani Welfare', 'Dawateislami', 'FGRF', "Rivaj Men's Wear"];
+export const CLIENTS = [
+  { name: 'J.', logo: jLogo },
+  { name: 'Saylani Welfare', logo: saylaniLogo },
+  { name: 'Dawateislami', logo: null },
+  { name: 'FGRF', logo: fgrfLogo },
+  { name: "Rivaj Men's Wear", logo: null },
+];
 
 /* ═══════════════════════════════════════════════
    CORE VALUES

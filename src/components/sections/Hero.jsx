@@ -1,4 +1,5 @@
 import { FiArrowRight } from 'react-icons/fi';
+import { FaStar } from 'react-icons/fa';
 import useScrollPosition from '../../hooks/useScrollPosition';
 
 /**
@@ -26,7 +27,8 @@ export default function Hero() {
 
       {/* ── Content ── */}
       <div className="relative z-20 max-w-[1200px] mx-auto px-6 pt-32 pb-20">
-        <div className="inline-block px-5 py-2 bg-gold/15 border border-gold/30 rounded-full text-gold text-xs font-semibold tracking-widest uppercase mb-8 anim-fade-up">
+        <div className="inline-flex items-center gap-2 px-5 py-2 bg-gold/15 border border-gold/30 rounded-full text-gold text-xs font-semibold tracking-widest uppercase mb-8 anim-fade-up">
+          <FaStar className="text-accent" size={12} />
           Pakistan's #1 Real Estate Platform
         </div>
 
@@ -47,7 +49,7 @@ export default function Hero() {
         <div className="flex flex-wrap gap-4 mb-16 anim-fade-up delay-300">
           <a
             href="#projects"
-            className="inline-flex items-center gap-2.5 px-8 py-4 bg-gold text-navy font-semibold text-sm rounded hover:bg-gold-dark hover:-translate-y-1 hover:shadow-xl hover:shadow-gold/30 transition-all duration-300"
+            className="inline-flex items-center gap-2.5 px-8 py-4 bg-gold text-white font-semibold text-sm rounded hover:bg-gold-dark hover:-translate-y-1 hover:shadow-xl hover:shadow-gold/30 transition-all duration-300"
           >
             Explore Projects <FiArrowRight size={18} />
           </a>
@@ -63,9 +65,9 @@ export default function Hero() {
         <div className="flex flex-wrap items-center gap-10 anim-fade-up delay-400">
           <HeroStat num="4500+" label="Happy Clients" />
           <div className="w-px h-10 bg-white/15" />
-          <HeroStat num="15+" label="Years Experience" />
+          <HeroStat num="26+" label="Years Experience" />
           <div className="w-px h-10 bg-white/15" />
-          <HeroStat num="50+" label="Projects Done" />
+          <HeroStat num="+250" label="Projects Done" />
         </div>
       </div>
 

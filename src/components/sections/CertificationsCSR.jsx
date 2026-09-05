@@ -17,8 +17,8 @@ export default function CertificationsCSR() {
           {/* ── Certifications ── */}
           <div ref={certRef} className="reveal bg-white p-10 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-500">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center">
-                <FaCertificate size={22} className="text-gold" />
+              <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
+                <FaCertificate size={22} className="text-accent-dark" />
               </div>
               <h3 className="font-heading text-2xl font-bold text-navy">Certifications</h3>
             </div>

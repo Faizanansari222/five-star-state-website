@@ -19,7 +19,7 @@ export default function CityPage() {
         <div className="text-center">
           <h1 className="font-heading text-4xl font-bold text-navy mb-4">City Not Found</h1>
           <p className="text-gray-500 mb-6">The city you're looking for doesn't exist.</p>
-          <Link to="/" className="px-6 py-3 bg-gold text-navy font-semibold rounded-lg hover:bg-gold-dark transition-colors">Go Home</Link>
+          <Link to="/" className="px-6 py-3 bg-gold text-white font-semibold rounded-lg hover:bg-gold-dark transition-colors">Go Home</Link>
         </div>
       </section>
     );
@@ -60,7 +60,7 @@ export default function CityPage() {
                 onClick={() => setFilter(f)}
                 className={`px-7 py-2.5 rounded-full text-sm font-medium border transition-all duration-300 ${
                   filter === f
-                    ? 'bg-gold text-navy border-gold shadow-lg shadow-gold/20'
+                    ? 'bg-gold text-white border-gold shadow-lg shadow-gold/20'
                     : 'bg-white text-gray-600 border-gray-200 hover:border-gold hover:text-gold'
                 }`}
               >

@@ -72,7 +72,7 @@ export default function ContactPage() {
                     <textarea required rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
                       className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/30 transition-colors resize-none" placeholder="Tell us about your requirements..." />
                   </div>
-                  <button type="submit" className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gold text-navy font-semibold text-sm rounded-lg hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/25 transition-all duration-300">
+                  <button type="submit" className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gold text-white font-semibold text-sm rounded-lg hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/25 transition-all duration-300">
                     <FiSend size={16} /> Send Message
                   </button>
                 </form>

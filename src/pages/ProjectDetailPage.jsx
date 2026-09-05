@@ -17,7 +17,7 @@ export default function ProjectDetailPage() {
         <div className="text-center">
           <h1 className="font-heading text-4xl font-bold text-navy mb-4">Project Not Found</h1>
           <p className="text-gray-500 mb-6">The project you're looking for doesn't exist.</p>
-          <Link to="/" className="px-6 py-3 bg-gold text-navy font-semibold rounded-lg hover:bg-gold-dark transition-colors">Go Home</Link>
+          <Link to="/" className="px-6 py-3 bg-gold text-white font-semibold rounded-lg hover:bg-gold-dark transition-colors">Go Home</Link>
         </div>
       </section>
     );
@@ -55,7 +55,7 @@ export default function ProjectDetailPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-6 left-6 right-6">
               <div className="flex items-center gap-3 mb-3">
-                <span className={`px-3.5 py-1 rounded-full text-xs font-bold tracking-wide uppercase ${project.type === 'Ongoing' ? 'bg-gold text-navy' : 'bg-emerald-500 text-white'}`}>{project.type}</span>
+                <span className={`px-3.5 py-1 rounded-full text-xs font-bold tracking-wide uppercase ${project.type === 'Ongoing' ? 'bg-gold text-white' : 'bg-emerald-500 text-white'}`}>{project.type}</span>
                 <span className="flex items-center gap-1.5 px-3 py-1 bg-black/50 backdrop-blur-sm rounded-full text-xs font-medium text-white">
                   <FiMaximize2 size={11} /> {project.area}
                 </span>
@@ -166,7 +166,7 @@ export default function ProjectDetailPage() {
                     <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
                       className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/30" placeholder="your@email.com" />
                   </div>
-                  <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gold text-navy font-semibold text-sm rounded-lg hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/25 transition-all duration-300">
+                  <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gold text-white font-semibold text-sm rounded-lg hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/25 transition-all duration-300">
                     <FiSend size={14} /> Send Inquiry
                   </button>
                 </form>

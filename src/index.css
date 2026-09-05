@@ -4,13 +4,17 @@
   --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 
-  --color-navy: #0a1628;
-  --color-navy-light: #112240;
-  --color-navy-mid: #1a365d;
-  --color-gold: #1E9BD5;
-  --color-gold-light: #93c5fd;
-  --color-gold-dark: #2E4893;
+  --color-navy: #071426;
+  --color-navy-light: #0e2038;
+  --color-navy-mid: #123354;
+  --color-gold: #0071BB;
+  --color-gold-light: #4DA3D9;
+  --color-gold-dark: #005490;
   --color-cream: #faf8f2;
+
+  /* Minimal-use accent — reserve for a small number of high-value highlights only */
+  --color-accent: #FCB813;
+  --color-accent-dark: #E0A00D;
 }
 
 /* Base */
@@ -25,11 +29,11 @@ body {
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #0a1628; }
-::-webkit-scrollbar-thumb { background: #25a2eb; border-radius: 4px; }
+::-webkit-scrollbar-track { background: #071426; }
+::-webkit-scrollbar-thumb { background: #0071BB; border-radius: 4px; }
 
 /* Selection */
-::selection { background: #055d9c; color: #ffffff; }
+::selection { background: #005490; color: #ffffff; }
 
 /* ===== ANIMATIONS ===== */
 @keyframes fade-up {
@@ -53,8 +57,8 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(55, 114, 177, 0.821); }
-  50% { box-shadow: 0 0 20px 10px rgba(37, 99, 235, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 113, 187, 0.7); }
+  50% { box-shadow: 0 0 20px 10px rgba(0, 113, 187, 0); }
 }
 @keyframes float {
   0%, 100% { transform: translateY(0); }

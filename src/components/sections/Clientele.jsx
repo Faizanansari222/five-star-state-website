@@ -9,7 +9,7 @@ export default function Clientele() {
 
   return (
     <section className="py-20 bg-navy relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,168,76,0.06),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,113,187,0.1),transparent_60%)]" />
       <div className="max-w-[1200px] mx-auto px-6 relative z-10">
         <div ref={headerRef} className="reveal text-center mb-12">
           <span className="inline-flex items-center gap-3 text-gold text-xs font-semibold tracking-[3px] uppercase mb-4">
@@ -26,11 +26,21 @@ export default function Clientele() {
         <div className="flex flex-wrap justify-center gap-6">
           {CLIENTS.map((client, i) => (
             <div
-              key={client}
-              className="px-8 py-5 bg-white/5 border border-white/10 rounded-xl text-white/70 font-semibold text-lg hover:bg-gold/10 hover:border-gold/30 hover:text-gold transition-all duration-400 cursor-default"
+              key={client.name}
+              className="flex items-center justify-center h-24 min-w-40 px-8 py-5 bg-white rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-1 hover:ring-2 hover:ring-gold/30 transition-all duration-400"
               style={{ animationDelay: `${i * 0.1}s` }}
             >
-              {client}
+              {client.logo ? (
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="max-h-12 max-w-35 object-contain"
+                />
+              ) : (
+                <span className="text-navy font-semibold text-lg text-center cursor-default">
+                  {client.name}
+                </span>
+              )}
             </div>
           ))}
         </div>

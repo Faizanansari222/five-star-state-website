@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   FiPhone,
   FiMenu,
@@ -16,12 +16,17 @@ import logo from "../../assets/LOGO/logo.png";
  * Mobile: slide-in menu with expandable sub-menus.
  */
 export default function Navbar() {
+  const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [projectsOpen, setProjectsOpen] = useState(false);
   const [activeCity, setActiveCity] = useState(null);
   const dropdownRef = useRef(null);
   const timeoutRef = useRef(null);
+
+  const isLinkActive = (href) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const isProjectsActive = pathname.startsWith("/projects");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -76,35 +81,52 @@ export default function Navbar() {
           <img
             src={logo}
             alt="Five Star Estate"
-            className="w-22 rounded-lg object-cover"
+            className="w-38 lg:w-45  object-cover"
           />
         </Link>
 
         {/* ── Desktop Nav ── */}
         <ul className="hidden lg:flex items-center gap-1">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <Link
-                to={link.href}
-                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-navy hover:bg-gray-100 rounded-lg transition-all duration-300"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const active = isLinkActive(link.href);
+            return (
+              <li key={link.href}>
+                <Link
+                  to={link.href}
+                  className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
+                    active
+                      ? "text-gold bg-gold/10"
+                      : "text-gray-600 hover:text-navy hover:bg-gray-100"
+                  }`}
+                >
+                  {link.label}
+                  {active && (
+                    <span className="absolute left-4 right-4 -bottom-px h-0.5 bg-gold rounded-full" />
+                  )}
+                </Link>
+              </li>
+            );
+          })}
 
           {/* ── Projects Dropdown ── */}
           <li className="relative" ref={dropdownRef}>
             <button
               onMouseEnter={handleMouseEnter}
               onClick={() => setProjectsOpen(!projectsOpen)}
-              className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-gray-600 hover:text-navy hover:bg-gray-100 rounded-lg transition-all duration-300"
+              className={`relative flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
+                isProjectsActive
+                  ? "text-gold bg-gold/10"
+                  : "text-gray-600 hover:text-navy hover:bg-gray-100"
+              }`}
             >
               Projects{" "}
               <FiChevronDown
                 size={14}
                 className={`transition-transform duration-300 ${projectsOpen ? "rotate-180" : ""}`}
               />
+              {isProjectsActive && (
+                <span className="absolute left-4 right-4 -bottom-px h-0.5 bg-gold rounded-full" />
+              )}
             </button>
 
             {/* City dropdown */}
@@ -171,7 +193,7 @@ export default function Navbar() {
           </a>
           <Link
             to="/contact"
-            className="px-6 py-2.5 bg-gold hover:text-white  text-sm font-semibold rounded hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/25 transition-all duration-300"
+            className="px-6 py-2.5 bg-gold text-sm font-semibold rounded hover:bg-gold-dark text-white hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/25 transition-all duration-300"
           >
             Book a Visit
           </Link>
@@ -198,7 +220,11 @@ export default function Navbar() {
 }
 
 function MobileMenu({ open, onClose, getCityProjects }) {
+  const { pathname } = useLocation();
   const [expandedCity, setExpandedCity] = useState(null);
+  const isLinkActive = (href) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const isProjectsActive = pathname.startsWith("/projects");
   return (
     <div
       className={`lg:hidden fixed  h-[500px]  inset-0 z-50 transition-opacity duration-300 ${
@@ -230,23 +256,34 @@ function MobileMenu({ open, onClose, getCityProjects }) {
 
         <div className="flex-1 overflow-y-auto px-6 py-4">
           <ul className="space-y-1">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  to={link.href}
-                  onClick={onClose}
-                  className="block py-3.5 text-base font-medium text-gray-700 hover:text-gold-dark border-b border-gray-100 transition-colors"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const active = isLinkActive(link.href);
+              return (
+                <li key={link.href}>
+                  <Link
+                    to={link.href}
+                    onClick={onClose}
+                    className={`block py-3.5 text-base font-medium border-b transition-colors ${
+                      active
+                        ? "text-gold border-gold/30"
+                        : "text-gray-700 hover:text-gold-dark border-gray-100"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
 
             {/* Projects section */}
             <li className="pt-2">
-              <div className="py-3.5 text-base font-bold text-navy">Projects</div>
+              <div className={`py-3.5 text-base font-bold ${isProjectsActive ? "text-gold" : "text-navy"}`}>
+                Projects
+              </div>
               <ul className="space-y-0">
-                {CITIES.map((city) => (
+                {CITIES.map((city) => {
+                  const cityActive = pathname.startsWith(`/projects/${city.slug}`);
+                  return (
                   <li key={city.id}>
                     <button
                       onClick={() =>
@@ -254,7 +291,9 @@ function MobileMenu({ open, onClose, getCityProjects }) {
                           expandedCity === city.slug ? null : city.slug,
                         )
                       }
-                      className="w-full flex items-center justify-between py-3 text-sm font-medium text-gray-600 hover:text-gold-dark border-b border-gray-50 transition-colors"
+                      className={`w-full flex items-center justify-between py-3 text-sm font-medium border-b border-gray-50 transition-colors ${
+                        cityActive ? "text-gold-dark" : "text-gray-600 hover:text-gold-dark"
+                      }`}
                     >
                       {city.name}
                       <FiChevronRight
@@ -287,7 +326,8 @@ function MobileMenu({ open, onClose, getCityProjects }) {
                       </ul>
                     )}
                   </li>
-                ))}
+                  );
+                })}
               </ul>
             </li>
           </ul>
