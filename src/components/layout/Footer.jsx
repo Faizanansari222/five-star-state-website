@@ -94,10 +94,14 @@ export default function Footer() {
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <FiMapPin size={16} className="text-gold-dark mt-1 shrink-0" />
-                <span className="text-sm text-gray-500 leading-relaxed">
-                  Dhoraji Colony, Kibriya Market Shop NO 22 CPBR 7/8 Karachi. ,
-                  Karachi, Pakistan
-                </span>
+                <a
+                  href={CONTACT.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-gray-500 leading-relaxed hover:text-gold-dark transition-colors"
+                >
+                  {CONTACT.address}
+                </a>
               </div>
               <div className="flex items-center gap-3">
                 <FiPhone size={16} className="text-gold-dark shrink-0" />

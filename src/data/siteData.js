@@ -10,6 +10,9 @@ import {
 import jLogo from '../assets/clients_LOGO/images.png';
 import fgrfLogo from '../assets/clients_LOGO/FGRF_LOGO.png';
 import saylaniLogo from '../assets/clients_LOGO/saylani_logo.png';
+import hibaIconAd1 from '../assets/ads_img/01.jpeg';
+import hibaIconAd2 from '../assets/ads_img/02.jpeg';
+import hibaIconAd3 from '../assets/ads_img/03.jpeg';
 
 /* ═══════════════════════════════════════════════
    NAVIGATION
@@ -57,6 +60,21 @@ export const CITIES = [
 
 export const PROJECTS = [
   // ── KARACHI ──
+  {
+    id: 'hiba-icon',
+    title: 'Hiba Icon',
+    city: 'karachi',
+    location: 'Garden West, near Islam Pura Masjid, Karachi',
+    type: 'Ongoing',
+    area: 'Residential',
+    price: 'PKR 65 Lac onwards (Special Offer)',
+    beds: '1-3 Bed',
+    desc: 'An exclusive pre-launch offer on premium 1, 2 & 3-bedroom apartments in Garden West, designed for growing families with a 3-year easy payment plan and just 20% down payment.',
+    longDesc: 'Hiba Icon is our newest residential development in Garden West, near Islam Pura Masjid, Karachi — designed for growing families who want modern apartment living without stretching their budget. The project offers a thoughtfully planned mix of 1, 2 and 3-bedroom apartments across multiple unit layouts (Type A, B & C), each optimized for natural light and efficient space usage.\n\nFor a limited time, 3-bedroom apartments are available at a special offer price of PKR 65 Lac, down from the original PKR 75 Lac, making this one of the most attractive investment opportunities in the area. Buyers also benefit from a flexible 3-year payment plan with only 20% down payment required to book a unit.\n\nWith its prime Garden West location, easy access to Islam Pura Masjid and the surrounding neighborhood, Hiba Icon is built for families looking for their next home and investors looking for strong appreciation potential.',
+    img: hibaIconAd1,
+    gallery: [hibaIconAd1, hibaIconAd2, hibaIconAd3],
+    features: ['1, 2 & 3-Bedroom Apartments', '3-Year Easy Payment Plan', '20% Down Payment', 'Special Offer Price', 'Designed for Growing Families', 'Prime Garden West Location'],
+  },
   {
     id: 'grand-mosque-view-tower',
     title: 'Grand Mosque View Tower',
@@ -426,9 +444,12 @@ export const SOCIAL_LINKS = [
    CONTACT INFO
    ═══════════════════════════════════════════════ */
 export const CONTACT = {
-  address: 'Office #123, Clifton, Karachi, Pakistan',
+  address: 'Shop 22, Al Kibriya Market, C.P Berar, near Zubaida Hospital, Dhoraji Cp & Berar Chs, Karachi',
   phone: '+92 300 123 4567',
   email: 'info@fivestarestate.pk',
+  mapUrl: 'https://maps.app.goo.gl/W4pLKM1VeGpXgURu6',
+  mapEmbedUrl:
+    'https://www.google.com/maps?q=Five+Star+Estate+%26+Builders,+Shop+22,+Al+Kibriya+Market,+C.P+Berar,+near+Zubaida+Hospital,+Dhoraji+Cp+%26+Berar+Chs,+Karachi&output=embed',
 };
 
 /* ═══════════════════════════════════════════════

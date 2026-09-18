@@ -1,16 +1,50 @@
 import { useState } from 'react';
-import { FiMapPin, FiPhone, FiMail, FiSend } from 'react-icons/fi';
-import { CONTACT, CITIES } from '../data/siteData';
+import { Link } from 'react-router-dom';
+import { FiSend } from 'react-icons/fi';
+import { CONTACT, CITIES, PROJECTS } from '../data/siteData';
+
+const HIBA_ICON = PROJECTS.find((p) => p.id === 'hiba-icon');
+
+const SHEET_WEBHOOK_URL = import.meta.env.VITE_CONTACT_SHEET_WEBHOOK_URL;
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', city: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
-    setForm({ name: '', email: '', phone: '', city: '', message: '' });
+
+    if (!SHEET_WEBHOOK_URL) {
+      console.error('VITE_CONTACT_SHEET_WEBHOOK_URL is not set — form submissions will not reach Google Sheets.');
+      setError(true);
+      return;
+    }
+
+    setSubmitting(true);
+    setError(false);
+
+    try {
+      // text/plain avoids a CORS preflight (Apps Script doesn't handle OPTIONS),
+      // and JSON.parse(e.postData.contents) on the Apps Script side is far more
+      // reliable than relying on Apps Script's multipart/form-data parsing.
+      await fetch(SHEET_WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(form),
+      });
+console.log(form)
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 4000);
+      setForm({ name: '', email: '', phone: '', city: '', message: '' });
+    } catch (err) {
+      console.error('Failed to submit contact form:', err);
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -37,6 +71,11 @@ export default function ContactPage() {
                 {submitted && (
                   <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-700 text-sm font-medium">
                     ✓ Thank you! Your message has been sent. We'll get back to you soon.
+                  </div>
+                )}
+                {error && (
+                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm font-medium">
+                    Something went wrong sending your message. Please try again or call us directly.
                   </div>
                 )}
                 <form onSubmit={handleSubmit} className="space-y-5">
@@ -72,57 +111,42 @@ export default function ContactPage() {
                     <textarea required rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
                       className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/30 transition-colors resize-none" placeholder="Tell us about your requirements..." />
                   </div>
-                  <button type="submit" className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gold text-white font-semibold text-sm rounded-lg hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/25 transition-all duration-300">
-                    <FiSend size={16} /> Send Message
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gold text-white font-semibold text-sm rounded-lg hover:bg-gold-dark hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/25 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none"
+                  >
+                    <FiSend size={16} /> {submitting ? 'Sending...' : 'Send Message'}
                   </button>
                 </form>
               </div>
             </div>
 
-            {/* Contact Info */}
+            {/* Ads + Map */}
             <div className="lg:col-span-2 space-y-6">
-              <div className="bg-white p-8 rounded-2xl shadow-sm">
-                <h3 className="font-heading text-xl font-bold text-navy mb-6">Contact Information</h3>
-                <div className="space-y-5">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center shrink-0"><FiMapPin size={18} className="text-gold" /></div>
-                    <div>
-                      <div className="text-sm font-bold text-navy mb-0.5">Office Address</div>
-                      <div className="text-sm text-gray-500">{CONTACT.address}</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center shrink-0"><FiPhone size={18} className="text-gold" /></div>
-                    <div>
-                      <div className="text-sm font-bold text-navy mb-0.5">Phone</div>
-                      <a href={`tel:${CONTACT.phone.replace(/\s/g, '')}`} className="text-sm text-gray-500 hover:text-gold-dark transition-colors">{CONTACT.phone}</a>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center shrink-0"><FiMail size={18} className="text-gold" /></div>
-                    <div>
-                      <div className="text-sm font-bold text-navy mb-0.5">Email</div>
-                      <a href={`mailto:${CONTACT.email}`} className="text-sm text-gray-500 hover:text-gold-dark transition-colors">{CONTACT.email}</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {/* Ad */}
+              <Link
+                to={`/projects/${HIBA_ICON.city}/${HIBA_ICON.id}`}
+                className="block rounded-2xl overflow-hidden shadow-sm h-64 hover:shadow-lg transition-shadow duration-300"
+              >
+                <img
+                  src={HIBA_ICON.img}
+                  alt={`${HIBA_ICON.title} advertisement`}
+                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                />
+              </Link>
 
-              <div className="bg-white p-8 rounded-2xl shadow-sm">
-                <h3 className="font-heading text-xl font-bold text-navy mb-4">Office Hours</h3>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between"><span className="text-gray-500">Monday - Friday</span><span className="font-medium text-navy">9:00 AM - 7:00 PM</span></div>
-                  <div className="flex justify-between"><span className="text-gray-500">Saturday</span><span className="font-medium text-navy">10:00 AM - 5:00 PM</span></div>
-                  <div className="flex justify-between"><span className="text-gray-500">Sunday</span><span className="font-medium text-gray-400">Closed</span></div>
-                </div>
-              </div>
-
-              {/* Map placeholder */}
-              <div className="bg-gray-200 rounded-2xl h-[200px] flex items-center justify-center">
-                <div className="text-center text-gray-400">
-                  <FiMapPin size={32} className="mx-auto mb-2" />
-                  <span className="text-sm">Google Map</span>
-                </div>
+              {/* Map */}
+              <div className="rounded-2xl overflow-hidden h-[200px] shadow-sm">
+                <iframe
+                  title="Five Star Estate Office Location"
+                  src={CONTACT.mapEmbedUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
             </div>
           </div>
